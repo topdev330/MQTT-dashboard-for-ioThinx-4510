@@ -1,0 +1,30 @@
+{
+  "name": "mqtt-dashboard",
+  "version": "1.0.0",
+  "description": "Description ",
+  "main": "app.js",
+  "dependencies": {
+    "mqtt": "^2.18.8",
+    "mqtt-packet": "^6.1.2",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supr3m3/ioThinx-4510-Series.git"
+  },
+  "keywords": [
+    "mqtt",
+    "node.js",
+    "dashboard"
+  ],
+  "author": "supr3m3",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supr3m3/ioThinx-4510-Series/issues"
+  },
+  "homepage": "https://github.com/supr3m3/ioThinx-4510-Series#readme"
+}

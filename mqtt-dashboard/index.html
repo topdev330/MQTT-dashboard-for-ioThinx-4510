@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A dashboard for MQTT application.">
+    <meta name="author" content="Anthony Ho">
+
+    <title>ioThinx 4510</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/socket.io.min.js"></script>
+    
+    <script type="text/javascript">    
+    var socket = io.connect('http://localhost:3000');
+      socket.on('connect', function () {
+        socket.on('mqtt', function (msg) {
+            var topic = msg.topic;
+            var payload = msg.payload.value;
+            var newPayload = payload.toString()
+            var message = msg.topic.split('/');
+            var name = message[2];
+            var state = message[3]
+            var timestamp = Math.round((new Date()).getTime() / 1000);
+           
+
+            $('#msg').html(topic + ', ' + payload);
+            
+            if (msg) {
+                $('#status').html("Online")
+            }
+
+            if (name == '45MR-2606-0@DO-00' && state == 'doStatus') {
+                console.log(payload)
+                $('#value0').html('(Switch Value: ' + payload + ')');
+                if (payload == 0) {
+                        $('#label0').text('Closed');
+                        $('#label0').removeClass('label-success').addClass('label-danger');
+                    } else {
+                        $('#label0').text('Open');
+                        $('#label0').removeClass('label-danger').addClass('label-success');
+                    }
+            }
+
+            if (name == '45MR-2606-0@DO-01' && state == 'doStatus') {
+                console.log(payload)
+                $('#value1').html('(Switch Value: ' + payload + ')');
+                if (payload == 0) {
+                        $('#label1').text('Closed');
+                        $('#label1').removeClass('label-success').addClass('label-danger');
+                    } else {
+                        $('#label1').text('Open');
+                        $('#label1').removeClass('label-danger').addClass('label-success');
+                    }
+            }
+            
+            if (name == '45MR-2606-0@DO-02' && state == 'doStatus') {
+                $('#value2').html('(Switch Value: ' + payload + ')');
+                if (payload == 0) {
+                        $('#label2').text('Closed');
+                        $('#label2').removeClass('label-success').addClass('label-danger');
+                    } else {
+                        $('#label2').text('Open');
+                        $('#label2').removeClass('label-danger').addClass('label-success');
+                    }
+            }
+            
+            if (name == '45MR-2606-0@DO-03' && state == 'doStatus') {
+                $('#value3').html('(Switch Value: ' + payload + ')');
+                if (payload == 0) {
+                        $('#label3').text('Closed');
+                        $('#label3').removeClass('label-success').addClass('label-danger');
+                    } else {
+                        $('#label3').text('Open');
+                        $('#label3').removeClass('label-danger').addClass('label-success');
+                    }
+            }
+       });
+    });
+    </script>
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <div class="container">
+        <div class="page-header"><h1><b>ioThinx 4510: MQTT Client Dashboard</b></h1></div>
+
+            <div class="panel panel-default">
+              <div class="panel-body">
+                    <table class="table table-striped">
+                        <tr>
+                        <td width="40%" style="vertical-align:middle;"><h3>45MR-2606: Channel DO-00</h3><small id="value0">(no value recieved)</small></td>
+                        <td style="vertical-align:middle;"></td>
+                        <td width="20%" style="vertical-align:middle;"><h4>&nbsp;<span id="label0" class="label">Unknown</span></h4></td>
+                        </tr>
+                        <!-- -->
+                        <tr>
+                        <td width="40%" style="vertical-align:middle;"><h3>45MR-2606: Channel DO-01</h3><small id="value1">(no value recieved)</small></td>
+                        <td style="vertical-align:middle;"></td>
+                        <td width="20%" style="vertical-align:middle;"><h4>&nbsp;<span id="label1" class="label">Unknown</span></h4></td>
+                        </tr>
+                        <!--  -->
+                        <tr>
+                        <td width="40%" style="vertical-align:middle;"><h3>45MR-2606: Channel DO-02</h3><small id="value2">(no value recieved)</small></td>
+                        <td style="vertical-align:middle;"></td>
+                        <td width="20%" style="vertical-align:middle;"><h4>&nbsp;<span id="label2" class="label">Unknown</span></h4></td>
+                        </tr>
+                        <!-- -->
+                        <tr>
+                        <td width="40%" style="vertical-align:middle;"><h3>45MR-2606: Channel DO-03</h3><small id="value3">(no value recieved)</small></td>
+                        <td style="vertical-align:middle;"></td>
+                        <td width="20%" style="vertical-align:middle;"><h4>&nbsp;<span id="label3" class="label">Unknown</span></h4></td>
+                        </tr>
+                   </table>
+              </div>
+            </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+              <div class="row">
+                <div class="col-md-6"><b>Latest MQTT msg:  </b> <small id="msg">no msg recieved</small></div>
+                <div class="col-md-6"><b>Status: </b>  <small id='status'></small></div>
+              </div>
+          </div>
+        </div>
+      <div class="footer">
+          <small><p class="text-center">&copy; <a href="https://github.com/denyskosh">Denys Koshliak</a></p></small>
+    </div>
+  </body>
+</html>
