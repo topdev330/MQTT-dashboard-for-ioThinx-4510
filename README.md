@@ -2,9 +2,10 @@
 This repository contains MQTT resources for ioThinx 4510.
 
 ### Principle
-![plot1](dashboard.PNG)
-### Dashboard
 ![plot1](send-json-data-diagram.jpg)
+
+### Dashboard
+![plot1](dashboard.PNG)
 
 
 Requirements
